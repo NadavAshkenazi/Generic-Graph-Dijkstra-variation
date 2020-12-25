@@ -2,6 +2,7 @@ package homework2;
 
 import java.util.*;
 import java.lang.reflect.Field;
+import java.
 
 public class Graph<T> {
 
@@ -82,9 +83,10 @@ public class Graph<T> {
      * 
      * @return a set of all the nodes in the graph
      */
-    public HashSet<T> listNodes(){
+    public Set<T> listNodes(){
         checkRep();
-        return nodes;
+        Set returnNodes = Collections.unmodifiableSet(nodes);
+        return returnNodes;
     }
 
     /**
@@ -93,12 +95,13 @@ public class Graph<T> {
      * @requires parent != NULL and is in the graph already
      * @return a set of all the childs of node parent in the graph
      */
-    public HashSet<T> listChildren(T parent){
+    public Set<T> listChildren(T parent){
         assert(parent!=null);
         checkRep();
         assert(this.contains(parent));
+        Set returnChildren = Collections.unmodifiableSet(this.adjacencyList.get(parent));
         checkRep();
-        return this.adjacencyList.get(parent);
+        return returnChildren;
     }
 
     /**
