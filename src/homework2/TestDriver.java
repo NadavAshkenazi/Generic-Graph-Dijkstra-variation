@@ -211,7 +211,12 @@ public class TestDriver {
 			names.add(((WeightedNode)iterator.next()).getName());
 		}
   		Collections.sort(names);
-  		output.println(graphName + "contains: " + names);
+		StringBuilder builder = new StringBuilder();
+		for (String value : names) {
+			builder.append(value);
+		}
+		String text = builder.toString();
+  		output.println(graphName + " contains: " + text);
 
   	}
 
@@ -241,7 +246,12 @@ public class TestDriver {
 			names.add(((WeightedNode)iterator.next()).getName());
 		}
 		Collections.sort(names);
-		output.println("the children of " + parentName + " in " + graphName + " are:" + names);
+		StringBuilder builder = new StringBuilder();
+		for (String value : names) {
+			builder.append(value);
+		}
+		String text = builder.toString();
+		output.println("the children of " + parentName + " in " + graphName + " are:" + text);
   	}
 
 
