@@ -3,4 +3,5 @@ CreateGraph X
 CreateNode n2 3
 AddNode X n1
 AddNode X n2
-AddEdge A n2 n1 
+AddEdge X n2 n1 
+ListChildren X n2

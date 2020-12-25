@@ -4,3 +4,4 @@ created node n2 with cost 3
 added node n1 to X
 added node n2 to X
 added edge from n2 to n1 in X
+the children of n2 in X are: n1
