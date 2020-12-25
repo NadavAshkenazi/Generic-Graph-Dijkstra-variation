@@ -1,0 +1,4 @@
+created node n1 with cost 2
+created graph X
+added node n1 to X
+added edge from n1 to n1 in X
