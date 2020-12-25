@@ -57,6 +57,7 @@ public class Graph<T> {
         checkRep();
         assert(this.contains(node) == false);
         assert(this.nodes.add(node));
+        this.adjacencyList.put(node, new HashSet<T>());
         checkRep();
     }
 

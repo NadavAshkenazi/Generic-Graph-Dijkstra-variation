@@ -1,5 +1,4 @@
 CreateNode n1 2
 CreateGraph X
 AddNode X n1
-AddNode X n1
-ListNodes X
+AddEdge X n1 n1

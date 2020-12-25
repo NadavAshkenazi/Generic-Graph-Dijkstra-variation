@@ -255,7 +255,7 @@ public class TestDriver {
 		}
 		String text = builder.toString();
 		text = text.substring(0, text.length() - 1);
-		output.println("the children of " + parentName + " in " + graphName + " are:" + text);
+		output.println("the children of " + parentName + " in " + graphName + " are: " + text);
   	}
 
 

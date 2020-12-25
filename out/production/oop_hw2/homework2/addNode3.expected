@@ -1,0 +1,8 @@
+created graph X
+created node n1 with cost 4
+created node n2 with cost 6
+created node n3 with cost 85
+added node n2 to X
+added node n3 to X
+added node n1 to X
+X contains: n1 n2 n3
