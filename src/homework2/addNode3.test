@@ -1,0 +1,8 @@
+CreateGraph X
+CreateNode n1 4
+CreateNode n2 6
+CreateNode n3 85
+AddNode X n2
+AddNode X n3
+AddNode X n1
+ListNodes X
