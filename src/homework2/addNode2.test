@@ -1,0 +1,8 @@
+CreateGraph X
+CreateNode b 3
+CreateNode c 2
+CreateNode a 4
+AddNode X c
+AddNode X a
+AddNode X b
+ListNodes X
