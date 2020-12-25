@@ -214,9 +214,11 @@ public class TestDriver {
 		StringBuilder builder = new StringBuilder();
 		for (String value : names) {
 			builder.append(value);
+			builder.append(" ");
 		}
 		String text = builder.toString();
-  		output.println(graphName + " contains: " + text);
+		text = text.substring(0, text.length() - 1);
+		output.println(graphName + " contains: " + text);
 
   	}
 
@@ -249,8 +251,10 @@ public class TestDriver {
 		StringBuilder builder = new StringBuilder();
 		for (String value : names) {
 			builder.append(value);
+			builder.append(" ");
 		}
 		String text = builder.toString();
+		text = text.substring(0, text.length() - 1);
 		output.println("the children of " + parentName + " in " + graphName + " are:" + text);
   	}
 
