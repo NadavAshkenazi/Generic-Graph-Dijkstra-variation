@@ -1,0 +1,5 @@
+CreateGraph A
+CreateNode n1 1
+AddNode A n1
+AddEdge A n1 n1
+FindPath A n1 -> n1

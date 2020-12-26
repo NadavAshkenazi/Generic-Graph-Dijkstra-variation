@@ -1,0 +1,4 @@
+created graph A
+created node n1 with cost 1
+added node n1 to A
+shortest path in A: n1
