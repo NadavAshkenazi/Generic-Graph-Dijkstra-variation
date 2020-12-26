@@ -18,6 +18,7 @@ public class Graph<T> {
 
     private HashMap<T, HashSet<T>> adjacencyList;
     private HashSet<T> nodes;
+    ;
 
 
     private void checkRep(){
@@ -52,11 +53,17 @@ public class Graph<T> {
      * @requires node != NULL and is not in the graph already
      * @effects adds node to the graph without any edges connected to it
      */
-    public void addNode(T node) {
-        assert (node != null);
+    public void addNode(T node) throws IllegalArgumentException, NullPointerException{
         checkRep();
-        assert(this.contains(node) == false);
-        assert(this.nodes.add(node));
+        if (node == null) {
+            checkRep();
+            throw new NullPointerException();
+        }
+        if (this.contains(node)){
+            checkRep();
+            throw new IllegalArgumentException("node already in the graph");
+        }
+        this.nodes.add(node);
         this.adjacencyList.put(node, new HashSet<T>());
         checkRep();
     }
@@ -70,11 +77,28 @@ public class Graph<T> {
      * @effects adds a directed edge from parent to child
      */
     public void addEdge(T parent, T child){
-        assert(parent != null && child != null);
         checkRep();
-        assert(this.contains(parent) && this.contains(child));
-        assert (this.adjacencyList.get(parent).contains(child) == false);
-        assert(this.adjacencyList.get(parent).add(child));
+        if (parent == null) {
+            checkRep();
+            throw new IllegalArgumentException("node is null");
+        }
+        if (child == null) {
+            checkRep();
+            throw new IllegalArgumentException("child is null");
+        }
+        if (!this.contains(parent)){
+            checkRep();
+            throw new IllegalArgumentException("parent not in the graph");
+        }
+        if (!this.contains(child)){
+            checkRep();
+            throw new IllegalArgumentException("child not in the graph");
+        }
+        if (this.adjacencyList.get(parent).contains(child)){
+            checkRep();
+            throw new IllegalArgumentException("edge already exists");
+        }
+        this.adjacencyList.get(parent).add(child);
         checkRep();
     };
 
@@ -95,9 +119,15 @@ public class Graph<T> {
      * @return a set of all the childs of node parent in the graph
      */
     public Set<T> listChildren(T parent){
-        assert(parent!=null);
         checkRep();
-        assert(this.contains(parent));
+        if (parent == null){
+            checkRep();
+            throw new IllegalArgumentException("node is null");
+        }
+        if (!this.contains(parent)){
+            checkRep();
+            throw new IllegalArgumentException("parent not in the graph");
+        }
         Set returnChildren = Collections.unmodifiableSet(this.adjacencyList.get(parent));
         checkRep();
         return returnChildren;
@@ -113,6 +143,7 @@ public class Graph<T> {
         if (!(o instanceof Graph))
             return false;
         Graph<T> graph = (Graph<T>) o;
+        checkRep();
         return this.adjacencyList.equals(graph.adjacencyList) && this.nodes.equals(graph.nodes);
     }
 
