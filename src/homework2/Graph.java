@@ -18,7 +18,6 @@ public class Graph<T> {
 
     private HashMap<T, HashSet<T>> adjacencyList;
     private HashSet<T> nodes;
-    ;
 
 
     private void checkRep(){
@@ -33,7 +32,7 @@ public class Graph<T> {
     };
 
 
-    private boolean contains(T node){
+    public boolean contains(T node){
         checkRep();
         return nodes.contains(node);
     };
