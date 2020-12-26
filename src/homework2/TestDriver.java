@@ -13,7 +13,6 @@ import java.util.*;
 public class TestDriver {
 
 	// String -> homework2.Graph: maps the names of graphs to the actual graph
-	// TODO: Parameterize the next line correctly.
   	private final Map<String,Graph<WeightedNode>> graphs = new HashMap<>();
   	// String -> WeightedNode: maps the names of nodes to the actual node
   	private final Map<String,WeightedNode> nodes = new HashMap<>();
@@ -107,9 +106,7 @@ public class TestDriver {
 
 
   	private void createGraph(String graphName) {
-  		
-  		//TODO: Insert your code here.
-  		
+
   		graphs.put(graphName,new Graph<WeightedNode>());
   		output.println("created graph " + graphName);
 
@@ -130,8 +127,6 @@ public class TestDriver {
 
  	private void createNode(String nodeName, String cost) {
 
- 		// TODO: Insert your code here.
- 		
  		nodes.put(nodeName, new WeightedNode(nodeName, Integer.parseInt(cost)));
  		output.println("created node " + nodeName +" with cost " + cost);
  		
@@ -152,8 +147,6 @@ public class TestDriver {
 
   	private void addNode(String graphName, String nodeName) {
 
-  		// TODO: Insert your code here.
-  		 
   		Graph<WeightedNode> graph = graphs.get(graphName);
   		WeightedNode node = nodes.get(nodeName);
   		graph.addNode(node);
@@ -176,9 +169,7 @@ public class TestDriver {
 
 
 	private void addEdge(String graphName, String parentName, String childName) {
-		
-		// TODO: Insert your code here.
-		  
+
 		Graph<WeightedNode> graph = graphs.get(graphName);
 		WeightedNode parent = nodes.get(parentName);
 		WeightedNode child = nodes.get(childName);
@@ -200,9 +191,7 @@ public class TestDriver {
 
 
   	private void listNodes(String graphName) {
-  		
-  		// TODO: Insert your code here.
-  		   
+
   		Graph<WeightedNode> graph = graphs.get(graphName);
   		Set graphNodes = new HashSet(graph.listNodes());
   		ArrayList<String> names = new ArrayList<String>();
@@ -213,12 +202,11 @@ public class TestDriver {
   		Collections.sort(names);
 		StringBuilder builder = new StringBuilder();
 		for (String value : names) {
-			builder.append(value);
 			builder.append(" ");
+			builder.append(value);
 		}
 		String text = builder.toString();
-		text = text.substring(0, text.length() - 1);
-		output.println(graphName + " contains: " + text);
+		output.println(graphName + " contains:" + text);
 
   	}
 
@@ -237,8 +225,6 @@ public class TestDriver {
 
   	private void listChildren(String graphName, String parentName) {
 
-  		// TODO: Insert your code here.
-
 		Graph<WeightedNode> graph = graphs.get(graphName);
 		WeightedNode parent = nodes.get(parentName);
 		Set children = new HashSet(graph.listChildren(parent));
@@ -250,12 +236,11 @@ public class TestDriver {
 		Collections.sort(names);
 		StringBuilder builder = new StringBuilder();
 		for (String value : names) {
-			builder.append(value);
 			builder.append(" ");
+			builder.append(value);
 		}
 		String text = builder.toString();
-		text = text.substring(0, text.length() - 1);
-		output.println("the children of " + parentName + " in " + graphName + " are: " + text);
+		output.println("the children of " + parentName + " in " + graphName + " are:" + text);
   	}
 
 
@@ -298,15 +283,33 @@ public class TestDriver {
 
   	private void findPath(String graphName, List<String> sourceArgs,
   						  List<String> destArgs) {
-  		
-  		// TODO: Insert your code here.
-  		   
-  		// ___ = graphs.get(graphName);
-  		// ___ = nodes.get(sourceArgs.get(i));
-  		// ___ = nodes.get(destArgs.get(i));
-  		// output.println(...);
-		
-  	}
+
+  		Graph<WeightedNode> graph = graphs.get(graphName);
+
+  		Set<WeightedNodePath> starts = new HashSet<WeightedNodePath>();
+		for (int i = 0; i < sourceArgs.size(); i++) {
+			starts.add(new WeightedNodePath(nodes.get(sourceArgs.get(i))));
+		}
+		Set<WeightedNode> goals = new HashSet<WeightedNode>();
+		for (int i = 0; i < destArgs.size(); i++) {
+			goals.add(nodes.get(destArgs.get(i)));
+		}
+		PathFinder<WeightedNode,WeightedNodePath> pf = new PathFinder<>(graph);
+		WeightedNodePath minPath = (WeightedNodePath) pf.findShortestPath(starts,goals);
+		if(minPath == null){
+			output.println("no path found in " + graphName);
+			return;
+		}
+		Iterator iterator = minPath.iterator();
+		StringBuilder builder = new StringBuilder();
+		while (iterator.hasNext()) {
+			String name = ((WeightedNode)iterator.next()).getName();
+			builder.append(" ");
+			builder.append(name);
+		}
+		String text = builder.toString();
+		output.println("shortest path in " + graphName + ":" + text);
+	}
 
 
 	private static void printUsage() {

@@ -71,7 +71,7 @@ public class PathFinder<N extends Comparable<N>, P extends Path<N,P>>  {
         checkRep();
         Iterator iterator = active.iterator();
         while(iterator.hasNext()){
-            if (((P)iterator).getEnd().equals(node)){
+            if (((P)iterator.next()).getEnd().equals(node)){
                 checkRep();
                 return true;
             }
@@ -89,9 +89,9 @@ public class PathFinder<N extends Comparable<N>, P extends Path<N,P>>  {
      */
     public Path findShortestPath(Set<P> starts, Set<N> goals){
         checkRep();
-        Iterator iterator = starts.iterator();
-        while (iterator.hasNext()){
-            P path = (P)iterator;
+        Iterator startsIterator = starts.iterator();
+        while (startsIterator.hasNext()){
+            P path = (P)(startsIterator.next());
             paths.put(path.getEnd(), path);
             active.add(path);
         }
@@ -102,9 +102,10 @@ public class PathFinder<N extends Comparable<N>, P extends Path<N,P>>  {
                 checkRep();
                 return minNodePath;
             }
-            iterator = graph.listChildren(minNode).iterator();
-            while (iterator.hasNext()){
-                N child = (N)iterator;
+            Set children = new HashSet(graph.listChildren(minNode));
+            Iterator childrenIterator = children.iterator();
+            while (childrenIterator.hasNext()){
+                N child = (N)(childrenIterator.next());
                 if(!finished.contains(child) && !checkIfActive(child))
                     active.add(minNodePath.extend(child));
             }
