@@ -31,11 +31,16 @@ public class Graph<T> {
         }
     };
 
-
+    /**
+     * @param node - node to check if in the graph
+     * @return true if the node is in the graoh false otherwise
+     */
     public boolean contains(T node){
         checkRep();
+        if (node == null)
+            return false;
         return nodes.contains(node);
-    };
+    }
 
     /**
      * Constructs a new Graph that contains nodes of immutables of type T.
