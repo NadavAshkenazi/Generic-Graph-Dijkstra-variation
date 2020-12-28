@@ -92,6 +92,23 @@ public class PathFinder<N extends Comparable<N>, P extends Path<N,P>>  {
         Iterator startsIterator = starts.iterator();
         while (startsIterator.hasNext()){
             P path = (P)(startsIterator.next());
+            N node = path.getEnd();
+            if (!this.graph.contains(node)){
+                throw new IllegalArgumentException("start node not in the graph");
+            }
+        }
+
+        Iterator goalsIterator = goals.iterator();
+        while (goalsIterator.hasNext()){
+            N node = (N)(goalsIterator.next());
+            if (!this.graph.contains(node)){
+                throw new IllegalArgumentException("goal node not in the graph");
+            }
+        }
+
+        startsIterator = starts.iterator();
+        while (startsIterator.hasNext()){
+            P path = (P)(startsIterator.next());
             paths.put(path.getEnd(), path);
             active.add(path);
         }
